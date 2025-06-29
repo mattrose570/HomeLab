@@ -1,41 +1,89 @@
-mattswoodwork.com {
-	reverse_proxy 192.168.1.29
+{
+	# Optional: define common global settings here, like email for ACME
+	# email your-email@example.com
 }
 
+# Reusable Authentik block
+(authentik) {
+	forward_auth http://192.168.1.17 {
+		uri /outpost.goauthentik.io/auth/caddy
+		copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+		trusted_proxies private_ranges
+	}
+}
+
+# Primary domain + outpost handler
+mattswoodwork.com {
+	route {
+		# Allow direct access to the outpost paths
+		reverse_proxy /outpost.goauthentik.io/* http://192.168.1.17
+
+		# Protect main site
+		import authentik
+		reverse_proxy 192.168.1.29
+	}
+}
+
+# 🔐 Protected subdomains
 nas.mattswoodwork.com {
-	reverse_proxy 192.168.1.142
+	route {
+		import authentik
+		reverse_proxy 192.168.1.142
+	}
 }
 
 homebox.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30149
-}
-
-pihole.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:20720
+	route {
+		import authentik
+		reverse_proxy 192.168.1.142:30149
+	}
 }
 
 tools.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30063
+	route {
+		import authentik
+		reverse_proxy 192.168.1.142:30063
+	}
 }
 
 nextcloud.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30027
+	route {
+		import authentik
+		reverse_proxy 192.168.1.142:30027
+	}
 }
 
 ha.mattswoodwork.com {
-	reverse_proxy 192.168.1.188:8123
+	route {
+		import authentik
+		reverse_proxy 192.168.1.188:8123
+	}
 }
 
 haobserver.mattswoodwork.com {
-	reverse_proxy 192.168.1.188:4357
+	route {
+		import authentik
+		reverse_proxy 192.168.1.188:4357
+	}
 }
 
 immich.mattswoodwork.com {
-	reverse_proxy 192.168.1.248:2283
+	route {
+		import authentik
+		reverse_proxy 192.168.1.248:2283
+	}
 }
 
 portainer.mattswoodwork.com {
-	reverse_proxy 192.168.1.29:9000
+	route {
+		import authentik
+		reverse_proxy 192.168.1.29:9000
+	}
+}
+
+# ⚠️ Public (not protected) services (adjust as needed)
+pihole.mattswoodwork.com {
+	reverse_proxy 192.168.1.142:20720
 }
 
 qbittorent.mattswoodwork.com {
