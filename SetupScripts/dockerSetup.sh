@@ -54,3 +54,7 @@ newgrp docker # or exec su -l $USER
 
 # verify
 docker run hello-world
+
+su $USERNAME
+
+echo "Docker setup complete. You can now run Docker commands without sudo."
