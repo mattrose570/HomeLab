@@ -45,3 +45,7 @@ qbittorent.mattswoodwork.com {
 jellyfin.mattswoodwork.com {
 	reverse_proxy 192.168.1.223:8096
 }
+
+homarr.mattswoodwork.com {
+	reverse_proxy 192.168.1.30:7575
+}
