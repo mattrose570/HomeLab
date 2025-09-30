@@ -11,7 +11,7 @@ nas.mattswoodwork.com {
 }
 
 # authentik 
-authentik.mattswoodwork.com {
+auth.mattswoodwork.com {
 	reverse_proxy 192.168.1.30:9000
 }
 
