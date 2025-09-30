@@ -10,6 +10,16 @@ nas.mattswoodwork.com {
 	reverse_proxy 192.168.1.142
 }
 
+# authentik 
+authentik.mattswoodwork.com {
+    reverse_proxy 192.168.1.30:9000
+}
+
+# myapp
+ha.mattswoodwork.com {
+    reverse_proxy 192.168.1.30:9000
+}
+
 homebox.mattswoodwork.com {
 	reverse_proxy 192.168.1.142:30149
 }
