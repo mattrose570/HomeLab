@@ -26,9 +26,9 @@ nextcloud.mattswoodwork.com {
 	reverse_proxy 192.168.1.142:30027
 }
 
-ha.mattswoodwork.com {
-	reverse_proxy 192.168.1.188:8123
-}
+# ha.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.188:8123
+# }
 
 haobserver.mattswoodwork.com {
 	reverse_proxy 192.168.1.188:4357
