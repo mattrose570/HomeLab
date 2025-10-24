@@ -3,7 +3,7 @@ mattswoodwork.com {
 }
 
 homebridge.mattswoodwork.com {
-	reverse_proxy 192.168.1.30:8581
+	reverse_proxy 192.168.1.45:8581
 }
 
 nas.mattswoodwork.com {
