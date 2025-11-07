@@ -12,7 +12,7 @@ nas.mattswoodwork.com {
 
 # authentik 
 auth.mattswoodwork.com {
-	reverse_proxy 192.168.1.45:9443
+	reverse_proxy 192.168.1.45:9000
 }
 
 # myapp
