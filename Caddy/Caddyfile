@@ -63,3 +63,8 @@ jellyfin.mattswoodwork.com {
 homarr.mattswoodwork.com {
 	reverse_proxy 192.168.1.30:7575
 }
+
+pocket-id.mattswoodwork.com {
+	reverse_proxy 192.168.1.142:30218
+}
+
