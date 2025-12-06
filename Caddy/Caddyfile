@@ -1,69 +1,69 @@
-mattswoodwork.com {
-	reverse_proxy 192.168.1.29
-}
-
-homebridge.mattswoodwork.com {
-	reverse_proxy 192.168.1.45:8581
-}
-
-nas.mattswoodwork.com {
-	reverse_proxy 192.168.1.142
-}
-
-# authentik 
-auth.mattswoodwork.com {
-	reverse_proxy 192.168.1.45
-}
-
-# myapp
-ha.mattswoodwork.com {
-	reverse_proxy 192.168.1.30:9000
-}
-
-homebox.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30149
-}
-
-pihole.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:20720
-}
-
-tools.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30063
-}
-
-nextcloud.mattswoodwork.com {
-	reverse_proxy 192.168.1.142:30027
-}
-
-# ha.mattswoodwork.com {
-# 	reverse_proxy 192.168.1.188:8123
+# mattswoodwork.com {
+# 	reverse_proxy 192.168.1.29
 # }
 
-haobserver.mattswoodwork.com {
-	reverse_proxy 192.168.1.188:4357
-}
+# homebridge.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.45:8581
+# }
 
-immich.mattswoodwork.com {
-	reverse_proxy 192.168.1.248:2283
-}
+# nas.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.142
+# }
 
-portainer.mattswoodwork.com {
-	reverse_proxy 192.168.1.29:9000
-}
+# # authentik 
+# auth.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.45
+# }
 
-qbittorent.mattswoodwork.com {
-	reverse_proxy 192.168.1.29:8080
-}
+# # myapp
+# ha.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.30:9000
+# }
 
-jellyfin.mattswoodwork.com {
-	reverse_proxy 192.168.1.45:8096
-}
+# homebox.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.142:30149
+# }
 
-homarr.mattswoodwork.com {
-	reverse_proxy 192.168.1.30:7575
-}
+# pihole.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.142:20720
+# }
 
-pocket-id.mattswoodwork.com {
-	reverse_proxy 192.168.1.45:1411
-}
+# tools.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.142:30063
+# }
+
+# nextcloud.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.142:30027
+# }
+
+# # ha.mattswoodwork.com {
+# # 	reverse_proxy 192.168.1.188:8123
+# # }
+
+# haobserver.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.188:4357
+# }
+
+# immich.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.248:2283
+# }
+
+# portainer.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.29:9000
+# }
+
+# qbittorent.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.29:8080
+# }
+
+# jellyfin.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.45:8096
+# }
+
+# homarr.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.30:7575
+# }
+
+# pocket-id.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.45:1411
+# }

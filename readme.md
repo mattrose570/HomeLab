@@ -11,3 +11,14 @@
 ### caddyserver     -- 192.168.1.175
 
 ### NAS -- 192.168.1.142
+
+
+## Common Issues:
+
+### Docker will not start on docker-services
+
+Remount and restart docker with
+```bash
+sudo mount -o remount,rw /
+sudo systemctl restart docker
+```
