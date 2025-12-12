@@ -58,7 +58,7 @@ echo "DEBUG: usermod -aG docker $TRUENAS_USERNAME"
 usermod -aG docker $TRUENAS_USERNAME
 
 # Logout and log back in or 
-exec su -l $USER
+exec su -l $TRUENAS_USERNAME
 
 # verify
 echo "DEBUG: docker run hello-world"
