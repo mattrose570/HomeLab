@@ -14,11 +14,11 @@ echo "apt remove docker docker-engine docker.io containerd runc"
 apt remove docker docker-engine docker.io containerd runc
 
 # Install dependencies
-echo "apt update"
-apt update
+echo "apt-get update"
+apt-get update
 
-echo "apt install --yes ca-certificates curl gnupg lsb-release"
-apt install --yes ca-certificates curl gnupg lsb-release
+echo "apt-get install --yes ca-certificates curl gnupg lsb-release"
+apt-get install --yes ca-certificates curl gnupg lsb-release
 
 # Add official gpg key 
 echo "mkdir -p /etc/apt/keyrings"
@@ -36,13 +36,11 @@ echo \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
   
 
-su $TRUENAS_USERNAME  
+sudo -u $TRUENAS_USERNAME # docker run hello-world
 # Install Docker engine 
-apt update --yes
-apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin --yes
+apt-get update --yes
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin --yes
 
-
-# exit
 
 # Start and enable docker
 
@@ -65,10 +63,11 @@ newgrp docker # or exec su -l $USER
 
 # verify
 echo "DEBUG: docker run hello-world"
-docker run hello-world
+# docker run hello-world
+sudo -u $TRUENAS_USERNAME docker run hello-world
 
-echo "DEBUG: su $TRUENAS_USERNAME"
-su $TRUENAS_USERNAME
+# echo "DEBUG: su $TRUENAS_USERNAME"
+# su $TRUENAS_USERNAME
 
 echo "Docker setup complete. You can now run Docker commands without sudo."
 
