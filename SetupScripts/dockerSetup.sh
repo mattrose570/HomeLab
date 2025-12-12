@@ -58,8 +58,7 @@ echo "DEBUG: usermod -aG docker $TRUENAS_USERNAME"
 usermod -aG docker $TRUENAS_USERNAME
 
 # Logout and log back in or 
-echo "DEBUG: newgrp docker"
-newgrp docker # or exec su -l $USER
+exec su -l $USER
 
 # verify
 echo "DEBUG: docker run hello-world"
