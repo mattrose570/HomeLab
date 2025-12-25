@@ -19,6 +19,6 @@
 
 Remount and restart docker with
 ```bash
-sudo mount -o remount,rw /
+sudo mount -o -nobrl remount,rw /
 sudo systemctl restart docker
 ```
