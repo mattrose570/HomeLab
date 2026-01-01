@@ -11,6 +11,5 @@ services:
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /path/to/plex/library:/config
       - /mnt/SMBShare/mediaserver/data/media:/media
     restart: unless-stopped
