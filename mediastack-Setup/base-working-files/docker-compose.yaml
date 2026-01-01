@@ -41,6 +41,8 @@ services:
       timeout: 5s
       # - ./postgres-data:/var/lib/postgresql
     volumes:
+      # - /home/mattrose570/mediastack/postgres-data:/var/lib/postgresql
+      # - /mnt/SMBShare/Backups/postgres-data:/var/lib/postgresql
       - ${FOLDER_FOR_DATA:?err}/postgres-data:/var/lib/postgresql
     environment:
       - TZ=${TIMEZONE:?err}
@@ -1303,7 +1305,7 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/qbittorrent:/config
-      # - ${FOLDER_FOR_MEDIA:?err}/torrents/downloads:/downloads
+      - ${FOLDER_FOR_MEDIA:?err}/torrents:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}
@@ -1496,7 +1498,7 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/sonarr:/config
-      - ${FOLDER_FOR_MEDIA:?err}/torrents/downloads:/downloads
+      - ${FOLDER_FOR_MEDIA:?err}/torrents:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}

@@ -12,6 +12,5 @@ services:
       - PLEX_CLAIM= #optional
     volumes:
       - /path/to/plex/library:/config
-      - /mnt/SMBShare/Media/Shows:/tv
-      - /mnt/SMBShare/Media/Movies:/movies
+      - /mnt/SMBShare/mediaserver/data/media:/media
     restart: unless-stopped

@@ -11,7 +11,7 @@ load_env_variables
 
 # mounting SMB fileshare on linux
 # Install tools 
-apt install cifs-utils --yes
+apt-get install cifs-utils --yes
 
 # Create mount point 
 mkdir -p "/mnt/$SHARE_NAME"
@@ -28,7 +28,7 @@ mount -t cifs "//$NAS_IP/SMB" /mnt/$SHARE_NAME -o credentials=$SMB_CREDENTIALS_L
 
 # Auto-Mounting configuration
 # Add line to /etc/fstab
-echo -e "//$NAS_IP/SMB /mnt/$SHARE_NAME cifs credentials=$SMB_CREDENTIALS_LOCATION,iocharset=utf8,uid=1000,gid=1000 0 0" > /etc/fstab
+echo -e "//$NAS_IP/SMB /mnt/$SHARE_NAME cifs credentials=$SMB_CREDENTIALS_LOCATION,iocharset=utf8,uid=1000,gid=1000,file_mode=0775,dir_mode=0775,nounix,noserverino,forceuid,forcegid 0 0" > /etc/fstab
 
 # test with command
 mount -a
