@@ -1,6 +1,6 @@
-# mattswoodwork.com {
-# 	reverse_proxy 192.168.1.29
-# }
+mattswoodwork.com {
+	reverse_proxy 192.168.1.154
+}
 
 # homebridge.mattswoodwork.com {
 # 	reverse_proxy 192.168.1.45:8581
@@ -11,9 +11,9 @@
 # }
 
 # # authentik 
-# auth.mattswoodwork.com {
-# 	reverse_proxy 192.168.1.45
-# }
+auth.mattswoodwork.com {
+	reverse_proxy 192.168.1.154:6080
+}
 
 # # myapp
 # ha.mattswoodwork.com {

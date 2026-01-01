@@ -1,2 +1,5 @@
 .env
 .DS_Store
+mediastack-Setup/base-working-files/traefik-dynamic.yaml
+mediastack-Setup/base-working-files/traefik-internal.yaml
+mediastack-Setup/base-working-files/traefik-static.yaml
