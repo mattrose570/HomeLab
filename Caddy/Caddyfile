@@ -1,6 +1,7 @@
-mattswoodwork.com {
-	reverse_proxy 192.168.1.154
-}
+# mattswoodwork.com {
+# 	reverse_proxy 192.168.1.154
+# }
+
 
 # homebridge.mattswoodwork.com {
 # 	reverse_proxy 192.168.1.45:8581
@@ -11,8 +12,12 @@ mattswoodwork.com {
 # }
 
 # # authentik 
-auth.mattswoodwork.com {
-	reverse_proxy 192.168.1.154:6080
+# auth.mattswoodwork.com {
+# 	reverse_proxy 192.168.1.154:6080
+# }
+
+nas.local {
+	reverse_proxy 192.168.1.142
 }
 
 # # myapp
@@ -60,9 +65,9 @@ auth.mattswoodwork.com {
 # 	reverse_proxy 192.168.1.45:8096
 # }
 
-# homarr.mattswoodwork.com {
-# 	reverse_proxy 192.168.1.30:7575
-# }
+homarr.mattswoodwork.com {
+	reverse_proxy 192.168.1.30:7575
+}
 
 # pocket-id.mattswoodwork.com {
 # 	reverse_proxy 192.168.1.45:1411

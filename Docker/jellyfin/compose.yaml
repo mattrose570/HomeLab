@@ -8,4 +8,5 @@ services:
       - "8920:8920"
     volumes:
       - /mnt/SMBShare/Media:/media
+      - /mnt/SMBShare/mediaserver/data/media:/mediastack
     restart: unless-stopped

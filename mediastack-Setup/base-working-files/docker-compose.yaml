@@ -1350,6 +1350,7 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/radarr:/config
+      - ${FOLDER_FOR_MEDIA:?err}/torrents/downloads:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}
