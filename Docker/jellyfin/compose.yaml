@@ -9,4 +9,5 @@ services:
     volumes:
       - /mnt/SMBShare/Media:/media
       - /mnt/SMBShare/mediaserver/data/media:/mediastack
+      - /mnt/SMBShare/mediaserver/data/backups/jellyfin:/config/data/backups
     restart: unless-stopped
