@@ -21,3 +21,8 @@ echo "Host $service_name" >> $fileToWrite
 echo "  HostName $ipAddress" >> $fileToWrite
 echo "  User $USERNAME" >> $fileToWrite
 echo "  IdentityFile ~/.ssh/homelab_keys/$service_name/$service_name" >> $fileToWrite
+
+echo "SSH key for $service_name created and SSH config updated."
+pubkey_file="$HOME/.ssh/homelab_keys/$service_name/$service_name.pub"
+echo "Public key to add to service ~/.ssh/authorized_keys:"
+cat "$pubkey_file"

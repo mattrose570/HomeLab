@@ -875,33 +875,33 @@ services:
 ##
 ###########################################################################
 ###########################################################################
-#   huntarr:
-#     image: huntarr/huntarr:latest
-#     container_name: huntarr
-#     depends_on:
-#       gluetun:
-#         condition: service_healthy
-#         restart: true
-#     volumes:
-#       - ${FOLDER_FOR_DATA:?err}/huntarr:/config
-#     environment:
-#       - PUID=${PUID:?err}
-#       - PGID=${PGID:?err}
-#       - TZ=${TIMEZONE:?err}
-#     network_mode: "service:gluetun"
-# #    ports:
-# #      - ${WEBUI_PORT_HUNTARR:?err}:9705                # Configured in Gluetun VPN container
-#     labels:
-#       - traefik.enable=true
-#     # ROUTERS
-#       - traefik.http.routers.huntarr.service=huntarr
-#       - traefik.http.routers.huntarr.rule=Host(`huntarr.${CLOUDFLARE_DNS_ZONE:?err}`)
-#       - traefik.http.routers.huntarr.entrypoints=secureweb
-#       - traefik.http.routers.huntarr.middlewares=authentik-forwardauth@file,security-headers@file,traefik-bouncer@file
-#     # SERVICES
-#       - traefik.http.services.huntarr.loadbalancer.server.scheme=http
-#       - traefik.http.services.huntarr.loadbalancer.server.port=9705
-#     # MIDDLEWARES
+  huntarr:
+    image: huntarr/huntarr:latest
+    container_name: huntarr
+    depends_on:
+      gluetun:
+        condition: service_healthy
+        restart: true
+    volumes:
+      - ${FOLDER_FOR_DATA:?err}/huntarr:/config
+    environment:
+      - PUID=${PUID:?err}
+      - PGID=${PGID:?err}
+      - TZ=${TIMEZONE:?err}
+    network_mode: "service:gluetun"
+#    ports:
+#      - ${WEBUI_PORT_HUNTARR:?err}:9705                # Configured in Gluetun VPN container
+    labels:
+      - traefik.enable=true
+    # ROUTERS
+      - traefik.http.routers.huntarr.service=huntarr
+      - traefik.http.routers.huntarr.rule=Host(`huntarr.${CLOUDFLARE_DNS_ZONE:?err}`)
+      - traefik.http.routers.huntarr.entrypoints=secureweb
+      - traefik.http.routers.huntarr.middlewares=authentik-forwardauth@file,security-headers@file,traefik-bouncer@file
+    # SERVICES
+      - traefik.http.services.huntarr.loadbalancer.server.scheme=http
+      - traefik.http.services.huntarr.loadbalancer.server.port=9705
+    # MIDDLEWARES
 
 ###########################################################################
 ###########################################################################
@@ -1071,7 +1071,7 @@ services:
 ###########################################################################
 ###########################################################################
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:5.1.4
+    image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     restart: unless-stopped
     depends_on:
@@ -1093,16 +1093,16 @@ services:
 ## Do Not Change Network for qBittorrent
 ## qBittorrent MUST always use a VPN / Secure Internet connection
     network_mode: "service:gluetun"
-    # labels:
-    #   - traefik.enable=true
-    # # ROUTERS
-    #   - traefik.http.routers.qbittorrent.service=qbittorrent
-    #   - traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.${CLOUDFLARE_DNS_ZONE:?err}`)
-    #   - traefik.http.routers.qbittorrent.entrypoints=secureweb
-    #   - traefik.http.routers.qbittorrent.middlewares=authentik-forwardauth@file,security-headers@file,traefik-bouncer@file
-    # # SERVICES
-    #   - traefik.http.services.qbittorrent.loadbalancer.server.scheme=http
-    #   - traefik.http.services.qbittorrent.loadbalancer.server.port=${WEBUI_PORT_QBITTORRENT:?err}
+    labels:
+      - traefik.enable=true
+    # ROUTERS
+      - traefik.http.routers.qbittorrent.service=qbittorrent
+      - traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.${CLOUDFLARE_DNS_ZONE:?err}`)
+      - traefik.http.routers.qbittorrent.entrypoints=secureweb
+      - traefik.http.routers.qbittorrent.middlewares=authentik-forwardauth@file,security-headers@file,traefik-bouncer@file
+    # SERVICES
+      - traefik.http.services.qbittorrent.loadbalancer.server.scheme=http
+      - traefik.http.services.qbittorrent.loadbalancer.server.port=${WEBUI_PORT_QBITTORRENT:?err}
     # MIDDLEWARES
 
 ###########################################################################
