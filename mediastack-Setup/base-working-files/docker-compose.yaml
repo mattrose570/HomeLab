@@ -1081,7 +1081,6 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/qbittorrent:/config
-      - ${FOLDER_FOR_MEDIA:?err}/torrents:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}
@@ -1126,7 +1125,6 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/radarr:/config
-      - ${FOLDER_FOR_MEDIA:?err}/torrents/downloads:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}
@@ -1275,7 +1273,6 @@ services:
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
       - ${FOLDER_FOR_DATA:?err}/sonarr:/config
-      - ${FOLDER_FOR_MEDIA:?err}/torrents:/downloads
     environment:
       - PUID=${PUID:?err}
       - PGID=${PGID:?err}
@@ -1442,7 +1439,7 @@ services:
       - UN_MYLAR_0_SYNCTHING=false
       ## Sonarr Settings
       ## Sonarr Config - Copy API Key from: http://sonarr:8989/general/settings
-      - UN_SONARR_0_URL=http://sonarr:8989
+      - UN_SONARR_0_URL=http://gluetun:8989
       - UN_SONARR_0_API_KEY=0123456789abcdef0123456789abcdef
       - UN_SONARR_0_PATHS_0=/data/torrents/anime
       - UN_SONARR_0_PATHS_1=/data/torrents/tv
@@ -1453,7 +1450,7 @@ services:
       - UN_SONARR_0_SYNCTHING=false
       ## Radarr Settings
       ## Radarr Config - Copy API Key from: http://radarr:7878/general/settings
-      - UN_RADARR_0_URL=http://radarr:7878
+      - UN_RADARR_0_URL=http://gluetun:7878
       - UN_RADARR_0_API_KEY=0123456789abcdef0123456789abcdef
       - UN_RADARR_0_PATHS_0=/data/torrents/movies
       - UN_RADARR_0_PROTOCOLS=torrent
@@ -1463,7 +1460,7 @@ services:
       - UN_RADARR_0_SYNCTHING=false
       ## Lidarr Settings
       ## Lidarr Config - Copy API Key from: http://lidarr:8686/general/settings
-      - UN_LIDARR_0_URL=http://lidarr:8686
+      - UN_LIDARR_0_URL=http://gluetun:8686
       - UN_LIDARR_0_API_KEY=0123456789abcdef0123456789abcdef
       - UN_LIDARR_0_PATHS_0=/data/torrents/music
       - UN_LIDARR_0_PROTOCOLS=torrent
@@ -1473,7 +1470,7 @@ services:
       - UN_LIDARR_0_SYNCTHING=false
       ## Readarr Settings
       ## Readarr Config - Copy API Key from: http://readarr:8787/general/settings
-      - UN_READARR_0_URL=http://readarr:8787
+      - UN_READARR_0_URL=http://gluetun:8787
       - UN_READARR_0_API_KEY=0123456789abcdef0123456789abcdef
       - UN_READARR_0_PATHS_0=/data/torrents/books
       - UN_READARR_0_PROTOCOLS=torrent
@@ -1483,7 +1480,7 @@ services:
       - UN_READARR_0_SYNCTHING=false
       ## Whisparr Settings
       ## Whisparr Config - Copy API Key from: http://readarr:6969/general/settings
-      - UN_WHISPARR_0_URL=http://whisparr:6969
+      - UN_WHISPARR_0_URL=http://gluetun:6969
       - UN_WHISPARR_0_API_KEY=0123456789abcdef0123456789abcdef
       - UN_WHISPARR_0_PATHS_0=/data/torrents/xxx
       - UN_WHISPARR_0_PROTOCOLS=torrent
@@ -1549,7 +1546,6 @@ services:
         restart: true
     volumes:
       - ${FOLDER_FOR_MEDIA:?err}:/data
-      - ${FOLDER_FOR_MEDIA:?err}/torrents/downloads:/downloads
       # - ${WHISPARR_MEDIA_FOLDER:?err}:/data/media
       - ${FOLDER_FOR_DATA:?err}/whisparr:/config
     environment:
@@ -1571,3 +1567,57 @@ services:
       - traefik.http.services.whisparr.loadbalancer.server.scheme=http
       - traefik.http.services.whisparr.loadbalancer.server.port=6969
     # MIDDLEWARES
+
+###########################################################################
+###########################################################################
+##
+##  Docker Compose File: Whisparr (Hotio.Dev)
+##  Function: Adult Media Library Manager
+##
+##  Documentation: https://wiki.servarr.com/whisparr
+##
+###########################################################################
+###########################################################################
+# APPNICENAME=Stash
+# APPDESCRIPTION=An organizer for your porn, written in Go
+  stash:
+    image: stashapp/stash:latest
+    container_name: stash
+    restart: unless-stopped
+    ## the container's port must be the same with the STASH_PORT in the environment section
+    ports:
+      - "9999:9999"
+    ## If you intend to use stash's DLNA functionality uncomment the below network mode and comment out the above ports section
+    # network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "2m"
+    environment:
+      - STASH_STASH=/data/
+      - STASH_GENERATED=/generated/
+      - STASH_METADATA=/metadata/
+      - STASH_CACHE=/cache/
+      ## Adjust below to change default port (9999)
+      - STASH_PORT=9999
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${FOLDER_FOR_MEDIA:?err}/media/xxx:/data
+      ## Adjust below paths (the left part) to your liking.
+      ## E.g. you can change ./config:/root/.stash to ./stash:/root/.stash
+      ## The left part is the path on your host, the right part is the path in the stash container.
+
+      ## Keep configs, scrapers, and plugins here.
+      - ./config:/root/.stash
+      ## Point this at your collection.
+      ## The left side is where your collection is on your host, the right side is where it will be in stash.
+      # - ./data:/data
+      ## This is where your stash's metadata lives
+      - ./metadata:/metadata
+      ## Any other cache content.
+      - ./cache:/cache
+      ## Where to store binary blob data (scene covers, images)
+      - ./blobs:/blobs
+      ## Where to store generated content (screenshots,previews,transcodes,sprites)
+      - ./generated:/generated
