@@ -1,0 +1,2 @@
+# No third-party runtime dependencies.
+# Requires Python 3.10 or newer (tested with Python 3.13).

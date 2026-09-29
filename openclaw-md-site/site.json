@@ -1,0 +1,23 @@
+{
+  "site": {
+    "title": "Private VA & Health Document Library",
+    "description": "A private, static reading copy of explicitly selected documents.",
+    "privacy_notice": "This private site contains VA/medical information and may contain PII/PHI. Do not publish it publicly."
+  },
+  "output_dir": "../../output/openclaw-docs-site",
+  "sources": [
+    {
+      "root": "../../output",
+      "include": [
+        "2026-09-25-IBS-gastroenterology-appointment-prep.md"
+      ],
+      "exclude": []
+    }
+  ],
+  "exclude": [
+    "**/records/**",
+    "**/memory/**",
+    "**/.*/**",
+    "**/*.pdf"
+  ]
+}

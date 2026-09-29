@@ -1087,8 +1087,6 @@ services:
       - UMASK=${UMASK:?err}
       - TZ=${TIMEZONE:?err}
       - WEBUI_PORT=${WEBUI_PORT_QBITTORRENT:?err}
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:qbittorrent
-      - TP_THEME=${TP_THEME:?err}
 ## Do Not Change Network for qBittorrent
 ## qBittorrent MUST always use a VPN / Secure Internet connection
     network_mode: "service:gluetun"
@@ -1584,6 +1582,8 @@ services:
     image: stashapp/stash:latest
     container_name: stash
     restart: unless-stopped
+    networks:
+      - mediastack
     ## the container's port must be the same with the STASH_PORT in the environment section
     ports:
       - "9999:9999"

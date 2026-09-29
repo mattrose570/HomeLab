@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.coverage
+.DS_Store
+.env
+
+# Publication inputs and generated sites may contain PII/PHI.
+content/**
+!content/.gitkeep
+dist/
+build/

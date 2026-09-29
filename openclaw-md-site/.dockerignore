@@ -1,0 +1,9 @@
+# Deny the entire build context, then admit only the files each Docker stage needs.
+**
+!Dockerfile
+!nginx.conf
+!mdsite.py
+!site.docker.json
+!content/
+!content/*.md
+!content/**/*.md
