@@ -1,105 +1,217 @@
+# Glance dashboard — migrated from Homarr export
+# Save as: config/glance.yml (Docker) or /etc/glance.yml (binary/LXC)
+
+theme:
+  # Warm red/yellow vibe to match your old Homarr colors (red primary, yellow accent)
+  background-color: 220 15 10
+  primary-color: 12 85 60
+  positive-color: 90 55 55
+  negative-color: 355 75 60
+  contrast-multiplier: 1.05
+
 pages:
   - name: Home
-    # Optionally, if you only have a single page you can hide the desktop navigation for a cleaner look
-    # hide-desktop-navigation: true
+    columns:
+      # ─── LEFT: quick stats + at-a-glance ─────────────────────────────
+      - size: small
+        widgets:
+          - type: clock
+            hour-format: 12h
+
+          - type: weather
+            location: Los Angeles, United States
+            units: imperial
+            hour-format: 12h
+
+          - type: monitor
+            title: Homelab Status
+            cache: 1m
+            sites:
+              - title: Proxmox | PVE
+                url: https://192.168.1.30:8006
+                icon: si:proxmox
+                allow-insecure: true
+              - title: Proxmox | PVE2
+                url: https://192.168.1.32:8006
+                icon: si:proxmox
+                allow-insecure: true
+              - title: Proxmox | PVE3
+                url: https://192.168.1.92:8006
+                icon: si:proxmox
+                allow-insecure: true
+              - title: TrueNAS
+                url: http://192.168.1.142
+                icon: si:truenas
+              - title: Jellyfin | LXC
+                url: http://192.168.1.56:8096
+                icon: si:jellyfin
+
+      # ─── CENTER: the *arr suite, laid out like your Homarr grid ──────
+      - size: full
+        widgets:
+          - type: bookmarks
+            title: Media Servers
+            groups:
+              - title: Streaming
+                links:
+                  - title: Jellyfin | LXC
+                    url: http://192.168.1.56:8096/web/#/home
+                    icon: si:jellyfin
+                  - title: Stash | MediaStack VM
+                    url: http://192.168.1.154:9999/settings?tab=tasks
+                    icon: si:stash
+
+              - title: "*arr Stack | MediaStack VM"
+                links:
+                  - title: Sonarr
+                    url: http://192.168.1.154:8989/
+                    icon: si:sonarr
+                  - title: Radarr
+                    url: http://192.168.1.154:7878/
+                    icon: si:radarr
+                  - title: Bazarr
+                    url: http://192.168.1.154:6767
+                    icon: si:bazarr
+                  - title: Whisparr
+                    url: http://192.168.1.154:6969/
+                    icon: si:radarr
+                  - title: Prowlarr
+                    url: http://192.168.1.154:9696/
+                    icon: si:prowlarr
+
+              - title: Downloaders
+                links:
+                  - title: SABnzbd
+                    url: http://192.168.1.154:8100
+                    icon: si:sabnzbd
+                  - title: qBittorrent
+                    url: http://192.168.1.154:8200/
+                    icon: si:qbittorrent
+
+              - title: Infrastructure
+                links:
+                  - title: Proxmox
+                    url: https://192.168.1.30:8006
+                    icon: si:proxmox
+                  - title: TrueNAS
+                    url: http://192.168.1.142
+                    icon: si:truenas
+                  - title: Pi-hole
+                    url: http://192.168.1.102/admin/
+                    icon: si:pihole
+
+          - type: monitor
+            title: "*arr Stack Status"
+            cache: 1m
+            sites:
+              - title: Sonarr
+                url: http://192.168.1.154:8989
+                icon: si:sonarr
+              - title: Radarr
+                url: http://192.168.1.154:7878
+                icon: si:radarr
+              - title: Bazarr
+                url: http://192.168.1.154:6767
+                icon: si:bazarr
+              - title: Whisparr
+                url: http://192.168.1.154:6969
+                icon: si:radarr
+              - title: Prowlarr
+                url: http://192.168.1.154:9696
+                icon: si:prowlarr
+              - title: SABnzbd
+                url: http://192.168.1.154:8100
+                icon: si:sabnzbd
+              - title: qBittorrent
+                url: http://192.168.1.154:8200
+                icon: si:qbittorrent
+              - title: Stash
+                url: http://192.168.1.142:30198
+                icon: si:stash
+
+      # ─── RIGHT: common links + fun feeds ─────────────────────────────
+      - size: small
+        widgets:
+          - type: bookmarks
+            title: Common Links
+            groups:
+              - title: Usenet
+                links:
+                  - title: NzbPlanet
+                    url: https://nzbplanet.net/
+
+          - type: releases
+            title: Homelab Releases
+            cache: 6h
+            repositories:
+              - jellyfin/jellyfin
+              - Sonarr/Sonarr
+              - Radarr/Radarr
+              - Prowlarr/Prowlarr
+              - morpheus65535/bazarr
+              - sabnzbd/sabnzbd
+              - qbittorrent/qBittorrent
+              - pi-hole/pi-hole
+              - stashapp/stash
+
+          - type: rss
+            title: Self-Hosted News
+            limit: 8
+            collapse-after: 4
+            cache: 6h
+            feeds:
+              - url: https://selfh.st/rss/
+                title: selfh.st
+
+  # ─── PAGE 2: infra deep-dive ───────────────────────────────────────
+  - name: Infrastructure
     columns:
       - size: small
         widgets:
-          - type: calendar
-            first-day-of-week: monday
+          - type: clock
+          - type: monitor
+            title: Core Services
+            cache: 1m
+            sites:
+              - title: Proxmox
+                url: https://192.168.1.30:8006
+                icon: si:proxmox
+                allow-insecure: true
+              - title: TrueNAS
+                url: http://192.168.1.142
+                icon: si:truenas
+              - title: Pi-hole
+                url: http://192.168.1.102/admin/
+                icon: si:pihole
 
+      - size: full
+        widgets:
+          - type: bookmarks
+            title: Admin Panels
+            groups:
+              - title: Hypervisor / Storage
+                links:
+                  - title: Proxmox
+                    url: https://192.168.1.30:8006
+                    icon: si:proxmox
+                  - title: TrueNAS
+                    url: http://192.168.1.142
+                    icon: si:truenas
+
+              - title: Network
+                links:
+                  - title: Pi-hole
+                    url: http://192.168.1.102/admin/
+                    icon: si:pihole
+
+      - size: small
+        widgets:
           - type: rss
-            limit: 10
-            collapse-after: 3
+            title: Homelab Reading
+            limit: 6
             cache: 12h
             feeds:
               - url: https://selfh.st/rss/
                 title: selfh.st
-                limit: 4
-              - url: https://ciechanow.ski/atom.xml
-              - url: https://www.joshwcomeau.com/rss.xml
-                title: Josh Comeau
-              - url: https://samwho.dev/rss.xml
-              - url: https://ishadeed.com/feed.xml
-                title: Ahmad Shadeed
-
-          - type: twitch-channels
-            channels:
-              - theprimeagen
-              - j_blow
-              - giantwaffle
-              - cohhcarnage
-              - christitustech
-              - EJ_SA
-
-      - size: full
-        widgets:
-          - type: group
-            widgets:
-              - type: hacker-news
-              - type: lobsters
-
-          - type: videos
-            channels:
-              - UCXuqSBlHAE6Xw-yeJA0Tunw # Linus Tech Tips
-              - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
-              - UCsBjURrPoezykLs9EqgamOA # Fireship
-              - UCBJycsmduvYEL83R_U4JriQ # Marques Brownlee
-              - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
-
-          - type: group
-            widgets:
-              - type: reddit
-                subreddit: technology
-                show-thumbnails: true
-              - type: reddit
-                subreddit: selfhosted
-                show-thumbnails: true
-
-      - size: small
-        widgets:
-          - type: weather
-            location: London, United Kingdom
-            units: metric # alternatively "imperial"
-            hour-format: 12h # alternatively "24h"
-            # Optionally hide the location from being displayed in the widget
-            # hide-location: true
-
-          - type: markets
-            markets:
-              - symbol: SPY
-                name: S&P 500
-              - symbol: BTC-USD
-                name: Bitcoin
-              - symbol: NVDA
-                name: NVIDIA
-              - symbol: AAPL
-                name: Apple
-              - symbol: MSFT
-                name: Microsoft
-
-          - type: releases
-            cache: 1d
-            # Without authentication the Github API allows for up to 60 requests per hour. You can create a
-            # read-only token from your Github account settings and use it here to increase the limit.
-            # token: ...
-            repositories:
-              - glanceapp/glance
-              - go-gitea/gitea
-              - immich-app/immich
-              - syncthing/syncthing
-
-  # Add more pages here:
-  # - name: Your page name
-  #   columns:
-  #     - size: small
-  #       widgets:
-          # Add widgets here
-
-  #     - size: full
-  #       widgets:
-  #         # Add widgets here
-
-  #     - size: small
-  #       widgets:
-  #         # Add widgets here
+              - url: https://www.reddit.com/r/selfhosted/.rss
+                title: r/selfhosted
