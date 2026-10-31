@@ -19,7 +19,7 @@ pages:
             hour-format: 12h
 
           - type: weather
-            location: Los Angeles, United States
+            location: Seattle, United States
             units: imperial
             hour-format: 12h
 
